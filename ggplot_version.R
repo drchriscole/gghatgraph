@@ -18,10 +18,10 @@ grandMean <- mean(dtMeans$DV)
 grandSD <- mean(dtSEM$DV) * .75 # produces y-axis range of 1.5 SDs (see Witt (in press) for details)
 
 
-ggplot(dtMeans, aes(x = factor(IV2), y = DV, group=DV )) + 
+ggplot(dtMeans, aes(x = factor(IV2), y = DV, group=hatPos )) + 
   geom_errorbar(aes(ymax = DV, ymin = DV), position = position_dodge(0.4), width = 0.4) +
   geom_rect( xmin = c(NA,1,NA,2) + 0,
-             xmax = c(NA,1,NA,2) + 0.3,
+             xmax = c(NA,1,NA,2) + 0.2,
              ymin = c(rep(dtMeans[1,3],2),rep(dtMeans[3,3],2)), 
              ymax = c(dtMeans[1:2,3],dtMeans[3:4,3]),
              colour = 'black') +
@@ -42,8 +42,9 @@ ggplot(dtMeans, aes(x = factor(IV2), y = DV, group=DV )) +
 #   layer(geom = 'point', stat = 'identity', params = list(shape = '-', size = 4))
 # 
 # 
-# df <- data.frame(x = c("a","b","c"), y = c(1,2,3))
-# ggplot(data = df, aes(x=x, y=y, fill = x)) +
+# df <- data.frame(x = c("a","a","b","b"), y = c(2,1.5,1.2,1.8), pos = c(1,2,1,2))
+# ggplot(data = df, aes(x=x, y=y, group=pos)) +
+#   geom_errorbar(aes(ymax = y, ymin = y), position = position_dodge(0.4), width = 0.4)
 #   geom_col() +
 #   geom_rect(data = df, aes(x = x, y=y), xmin = as.numeric(df$x[[2]]) - 0.2,
 #             xmax = as.numeric(df$x[[3]]) + 0.3,
